@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -58,12 +60,18 @@ public class PartsDownloader extends AsyncTask<Void, String, Boolean> {
             input.close();
             output.flush();
             String json = new String(output.toByteArray());
-            System.out.println(json);
+            //System.out.println(json);
+            JSONObject jsonObject = new JSONObject(json);
+            JSONObject newJSON = jsonObject.getJSONObject("set_id");
+            System.out.println(newJSON.toString());
+            jsonObject = new JSONObject(newJSON.toString());
+            System.out.println(jsonObject.getString("set_id"));
+            System.out.println(jsonObject.getJSONArray("parts"));
         }catch (Exception e){
             Log.e("Error: ", e.getMessage());
             return false;
         }
-        return null;
+        return true;
     }
 
     @Override

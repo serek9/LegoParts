@@ -1,16 +1,5 @@
 package com.example.dam.legoparts;
 
-//{"part_id":"2653",
-//        "qty":"1",
-//        "ldraw_color_id":"0",
-//        "type":1,
-//        "part_name":"Brick Special 1 x 4 with Groove",
-//        "color_name":"Black",
-//        "part_img_url":"https:\/\/img.rebrickable.com\/img\/pieces\/elements\/265326.jpg",
-//        "element_id":"265326",
-//        "element_img_url":"https:\/\/img.rebrickable.com\/img\/pieces\/elements\/265326.jpg",
-//        "rb_color_id":0,
-//        "part_type_id":21}
 
 public class Part {
     private int part_id;
