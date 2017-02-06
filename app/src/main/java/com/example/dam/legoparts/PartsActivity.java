@@ -17,12 +17,12 @@ import java.util.Map;
 
 public class PartsActivity extends AppCompatActivity {
 
-    public class Product extends HashMap<String, Object>{
-        public Product(int id, String name, float price, boolean inStock, int image){
+    public class Part extends HashMap<String, Object>{
+        public Part(int id, String name, String color, int image, int logo){
             this.put("id", id);
             this.put("name", name);
-            this.put("price", price);
-            this.put("inStock", inStock);
+            this.put("color", color);
+            this.put("logo", logo);
             this.put("image", image);
         }
     }
@@ -31,35 +31,33 @@ public class PartsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parts);
-        ListView llista4 = (ListView) findViewById(R.id.list_parts);
+        ListView  listView = (ListView) findViewById(R.id.list_parts);
 
-        List<Product> dades = new ArrayList<>();
-        dades.add(new Product(1, "Part nº 1", 70.0f, true, R.drawable.lego_head));
+        List<Part> dades = new ArrayList<>();
+        dades.add(new Part(1, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(2, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(3, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(4, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(5, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(6, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(7, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(8, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(1, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(2, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(3, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(4, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(5, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(6, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(7, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(8, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
 
         SimpleAdapter adapter = new SimpleAdapter(
                 PartsActivity.this, dades,
                 R.layout.list_parts,
-                new String[] {"name","price", "inStock", "image"},
-                new int[] { R.id.nom, R.id.preu, R.id.stock, R.id.imatge }
+                new String[] {"name","color", "logo", "image"},
+                new int[] { R.id.name, R.id.color, R.id.logo, R.id.image }
         );
-        adapter.setViewBinder(new SimpleAdapter.ViewBinder() {
-            @Override
-            public boolean setViewValue(View view, Object data, String textRepresentation) {
-                if (view.getId() == R.id.stock){
-                    TextView textView = (TextView)view;
-                    if ((boolean)data) {
-                        textView.setText("EN STOCK");
-                        textView.setTextColor(Color.GREEN);
-                    }
-                    else {
-                        textView.setText("NO STOCK");
-                        textView.setTextColor(Color.RED);
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-        llista4.setAdapter(adapter);
+
+        listView.setAdapter(adapter);
     }
 }

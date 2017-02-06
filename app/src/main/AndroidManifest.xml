@@ -19,8 +19,7 @@
         </activity>
         <activity
             android:name=".PartsActivity"
-            android:label="@string/title_activity_parts"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_parts"></activity>
     </application>
 
 </manifest>
