@@ -67,19 +67,19 @@ public class PartsActivity extends AppCompatActivity {
         List<Part> dades = new ArrayList<>();
         dades.add(new Part(1, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
         dades.add(new Part(2, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        //dades.add(new Part(3, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(3, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
         dades.add(new Part(4, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
         dades.add(new Part(5, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        //dades.add(new Part(6, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        //dades.add(new Part(7, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(8, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        //dades.add(new Part(1, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(2, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        //dades.add(new Part(3, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        dades.add(new Part(4, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        //dades.add(new Part(5, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
         dades.add(new Part(6, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        //dades.add(new Part(7, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(7, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(8, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(1, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(2, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(3, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(4, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
+        dades.add(new Part(5, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(6, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
+        dades.add(new Part(7, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
         dades.add(new Part(8, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
 
 
