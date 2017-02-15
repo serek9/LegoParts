@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         goButton.setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this, PartsActivity.class);
+                String setId = setText.getText().toString();
+                intent.putExtra("setId", setId);
                 startActivity(intent);
             }
         });

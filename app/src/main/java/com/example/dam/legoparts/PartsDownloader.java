@@ -13,12 +13,18 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class PartsDownloader extends AsyncTask<Void, String, Boolean> {
+public class PartsDownloader extends AsyncTask<String, String, String> {
+
+    String xml;
+
+    public PartsDownloader(){}
 
     private Context context;
+
     public PartsDownloader(Context context){ this.context = context;}
 
     private OnPartsLoadedListener listener = null;
+
     public void setOnPartsLoadedListener(OnPartsLoadedListener listener){
         this.listener = listener;
     }
@@ -40,10 +46,11 @@ public class PartsDownloader extends AsyncTask<Void, String, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected String doInBackground(String... strings) {
         int count;
         try{
-            URL url = new URL("https://rebrickable.com/api/get_set_parts?key=JMMsrpkR1w&format=json&set=60128-1");
+            String key = "JMMsrpkR1w";
+            URL url = new URL("https://rebrickable.com/api/get_set_parts?key="+key+"&set="+strings[0]);
             URLConnection connection = url.openConnection();
             connection.connect();
             int lengthOfFile = connection.getContentLength();
@@ -59,19 +66,12 @@ public class PartsDownloader extends AsyncTask<Void, String, Boolean> {
             }
             input.close();
             output.flush();
-            String json = new String(output.toByteArray());
-            //System.out.println(json);
-            JSONObject jsonObject = new JSONObject(json);
-            JSONObject newJSON = jsonObject.getJSONObject("set_id");
-            System.out.println(newJSON.toString());
-            jsonObject = new JSONObject(newJSON.toString());
-            System.out.println(jsonObject.getString("set_id"));
-            System.out.println(jsonObject.getJSONArray("parts"));
+            xml = new String(output.toByteArray());
         }catch (Exception e){
             Log.e("Error: ", e.getMessage());
-            return false;
+            return null;
         }
-        return true;
+        return xml;
     }
 
     @Override
@@ -80,8 +80,8 @@ public class PartsDownloader extends AsyncTask<Void, String, Boolean> {
     }
 
     @Override
-    protected void onPostExecute(Boolean aBoolean) {
+    protected void onPostExecute(String a) {
         pDialog.dismiss();
-        if (listener != null) listener.onPartsLoaded(aBoolean);
+        super.onPostExecute(a);
     }
 }
