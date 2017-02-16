@@ -134,8 +134,8 @@ public class PartsActivity extends AppCompatActivity {
                 String color = part.getColor_name();
                 holder.partColor.setText(color);
                 Log.d("IMAGEN-----------",part.getElement_img_url());
-                Drawable image = LoadImageFromWebOperations(part.getElement_img_url());
-                holder.partImage.setImageDrawable(image);
+                //Drawable image = LoadImageFromWebOperations(part.getElement_img_url());
+                holder.partImage.setImageDrawable(LoadImageFromWebOperations(part.getPart_img_url()));
                 holder.partLogo.setImageResource(R.drawable.lego_head);
                 return myView;
             }
@@ -143,8 +143,9 @@ public class PartsActivity extends AppCompatActivity {
     public static Drawable LoadImageFromWebOperations(String url) {
         try {
             InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is,"brick");
+            Drawable d = Drawable.createFromStream(is,"srcName");
             return d;
+            //TODO -- http://www.vogella.com/tutorials/JavaLibrary-OkHttp/article.html
         } catch (Exception e) {
             return null;
         }
