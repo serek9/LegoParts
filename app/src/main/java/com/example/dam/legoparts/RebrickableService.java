@@ -49,7 +49,7 @@ public class RebrickableService extends AsyncTask<String, String, String> {
         int count;
         try{
             String key = "JMMsrpkR1w";
-            URL url = new URL("https://rebrickable.com/api/get_set_parts?key="+key+"&set="+strings[0]);
+            URL url = new URL("http://stucom.flx.cat/lego/get_set_parts.php?key="+key+"&set="+strings[0]);
             URLConnection connection = url.openConnection();
             connection.connect();
             int lengthOfFile = connection.getContentLength();

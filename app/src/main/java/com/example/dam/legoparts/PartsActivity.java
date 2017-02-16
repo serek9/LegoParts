@@ -2,6 +2,7 @@ package com.example.dam.legoparts;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
@@ -17,9 +18,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dam.legoparts.R;
-import com.squareup.picasso.Picasso;
 
+
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +46,6 @@ public class PartsActivity extends AppCompatActivity {
         String tsv = downloadParts(setId);
 
         parts.loadFromTsv(tsv);
-
         Part p = parts.getPartFromIndex(1);
         ListView  listView = (ListView) findViewById(list_parts);
 
@@ -132,10 +133,20 @@ public class PartsActivity extends AppCompatActivity {
                 holder.partName.setText(name);
                 String color = part.getColor_name();
                 holder.partColor.setText(color);
-                com.example.dam.legoparts.Picasso.imageFromURL(this.context, part.getElement_img_url(), holder.partImage);
-                int logo = part.getLogo();
-                holder.partLogo.setImageResource(logo);
+                Log.d("IMAGEN-----------",part.getElement_img_url());
+                Drawable image = LoadImageFromWebOperations(part.getElement_img_url());
+                holder.partImage.setImageDrawable(image);
+                holder.partLogo.setImageResource(R.drawable.lego_head);
                 return myView;
             }
         }
+    public static Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is,"brick");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
