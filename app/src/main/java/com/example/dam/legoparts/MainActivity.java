@@ -32,24 +32,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        downloadParts();
-
     }
 
-    public void init(){
 
-    }
 
-    public void downloadParts() {
-        PartsDownloader dd = new PartsDownloader(this);
-        dd.setOnPartsLoadedListener(new OnPartsLoadedListener() {
-            @Override
-            public void onPartsLoaded(boolean ok) {
-                Log.d("Sergio", "Download result: " + ok);
-                if (ok) init();
-            }
 
-        });
-        dd.execute();
-    }
 }

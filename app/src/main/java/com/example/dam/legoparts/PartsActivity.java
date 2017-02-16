@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,73 +18,37 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dam.legoparts.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import static com.example.dam.legoparts.R.id.list_parts;
 
 public class PartsActivity extends AppCompatActivity {
 
 
-    public class Part{
-
-        private int id;
-        private String name;
-        private String color;
-        private int image;
-        private int logo;
-
-        public Part(int id, String name, String color, int image, int logo) {
-            this.id = id;
-            this.name = name;
-            this.color = color;
-            this.image = image;
-            this.logo = logo;
-        }
-
-        public int getId() {return id;}
-        public void setId(int id) {this.id = id;}
-        public String getName() {return name;}
-        public void setName(String name) {this.name = name;}
-        public String getColor() {return color;}
-        public void setColor(String color) {this.color = color;}
-        public int getImage() {return image;}
-        public void setImage(int image) {this.image = image;}
-        public int getLogo() {return logo;}
-        public void setLogo(int logo) {this.logo = logo;}
-
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parts);
+
+        final PartRepository parts = new PartRepository();
+
+        Bundle extras = getIntent().getExtras();
+        String setId = extras.getString("setId");
+
+        String tsv = downloadParts(setId);
+
+        parts.loadFromTsv(tsv);
+
+        Part p = parts.getPartFromIndex(1);
         ListView  listView = (ListView) findViewById(list_parts);
 
-        List<Part> dades = new ArrayList<>();
-        dades.add(new Part(1, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(2, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        dades.add(new Part(3, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        dades.add(new Part(4, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        dades.add(new Part(5, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(6, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(7, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(8, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(1, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(2, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        dades.add(new Part(3, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        dades.add(new Part(4, "Brick Special 1 x 6", "Blue", R.drawable.brick2, R.drawable.lego_head));
-        dades.add(new Part(5, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(6, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(7, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-        dades.add(new Part(8, "Brick Special 1 x 4", "Red", R.drawable.brick, R.drawable.lego_head));
-
-
-        CatalogAdapter adapter = new CatalogAdapter(this,dades);
+        CatalogAdapter adapter = new CatalogAdapter(this, parts);
         listView.setAdapter(adapter);
         listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -99,31 +64,42 @@ public class PartsActivity extends AppCompatActivity {
 
     }
 
+    public String downloadParts(String codigo) {
+        String xml = "";
+        RebrickableService dd = new RebrickableService(this);
+        try {
+            xml = dd.execute(codigo).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return xml;
+    }
+
     public class CatalogAdapter extends BaseAdapter {
 
             private Context context;
-            private List<Part> catalog;
+            private PartRepository catalog;
 
-            public CatalogAdapter(Context context, List<Part> catalog) {
+            public CatalogAdapter(Context context, PartRepository catalog) {
                 this.context = context;
                 this.catalog = catalog;
             }
 
             @Override
             public int getCount() {
-                return catalog.size();
+                return catalog.getNumOfParts();
             }
 
             @Override
             public Object getItem(int position) {
-                return catalog.get(position);
+                return catalog.getPartFromIndex(position);
             }
 
             @Override
             public long getItemId(int position) {
-                Part p = catalog.get(position);
-                int id = p.getId();
-                return id;
+                return position;
             }
 
             public class ViewHolder{
@@ -151,17 +127,15 @@ public class PartsActivity extends AppCompatActivity {
                 }
                 ViewHolder holder = (ViewHolder) myView.getTag();
                 //|-Per estalviar inflates.
-                Part part = catalog.get(position);
-                String nom = part.getName();
-                holder.partName.setText(nom);
-                String color = part.getName();
-                holder.partColor.setText(nom);
-                int image = part.getImage();
-                holder.partImage.setImageResource(image);
+                Part part = catalog.getPartFromIndex(position);
+                String name = part.getPart_name();
+                holder.partName.setText(name);
+                String color = part.getColor_name();
+                holder.partColor.setText(color);
+                com.example.dam.legoparts.Picasso.imageFromURL(this.context, part.getElement_img_url(), holder.partImage);
                 int logo = part.getLogo();
                 holder.partLogo.setImageResource(logo);
                 return myView;
             }
         }
-
 }

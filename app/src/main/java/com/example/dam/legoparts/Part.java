@@ -2,21 +2,22 @@ package com.example.dam.legoparts;
 
 
 public class Part {
-    private int part_id;
+    private String part_id;
     private int qty;
     private int ldraw_color_id;
     private int type;
     private String part_name;
     private String color_name;
     private String part_img_url;
-    private int element_id;
+    private String element_id;
     private String element_img_url;
     private int rb_color_id;
     private int part_type_id;
+    private int Logo;
 
     public Part() {}
 
-    public Part(int part_id, int qty, int ldraw_color_id, int type, String part_name, String color_name, String part_img_url, int element_id, String element_img_url, int rb_color_id, int part_type_id) {
+    public Part(String part_id, int qty, int ldraw_color_id, String part_name, String color_name, String part_img_url, String element_id, String element_img_url, int rb_color_id, int part_type_id) {
         this.part_id = part_id;
         this.qty = qty;
         this.ldraw_color_id = ldraw_color_id;
@@ -30,9 +31,9 @@ public class Part {
         this.part_type_id = part_type_id;
     }
 
-    public int getPart_id() {return part_id;}
+    public String getPart_id() {return part_id;}
 
-    public void setPart_id(int part_id) {this.part_id = part_id;}
+    public void setPart_id(String part_id) {this.part_id = part_id;}
 
     public int getQty() {return qty;}
 
@@ -58,9 +59,9 @@ public class Part {
 
     public void setPart_img_url(String part_img_url) {this.part_img_url = part_img_url;}
 
-    public int getElement_id() {return element_id;}
+    public String getElement_id() {return element_id;}
 
-    public void setElement_id(int element_id) {this.element_id = element_id;}
+    public void setElement_id(String element_id) {this.element_id = element_id;}
 
     public String getElement_img_url() {return element_img_url;}
 
@@ -73,6 +74,14 @@ public class Part {
     public int getPart_type_id() {return part_type_id;}
 
     public void setPart_type_id(int part_type_id) {this.part_type_id = part_type_id;}
+
+    public int getLogo() {
+        return Logo;
+    }
+
+    public void setLogo(int logo) {
+        Logo = logo;
+    }
 
     @Override
     public String toString() {
