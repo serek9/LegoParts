@@ -15,13 +15,10 @@ public class Part {
     private int part_type_id;
     private int Logo;
 
-    public Part() {}
-
     public Part(String part_id, int qty, int ldraw_color_id, String part_name, String color_name, String part_img_url, String element_id, String element_img_url, int rb_color_id, int part_type_id) {
         this.part_id = part_id;
         this.qty = qty;
         this.ldraw_color_id = ldraw_color_id;
-        this.type = type;
         this.part_name = part_name;
         this.color_name = color_name;
         this.part_img_url = part_img_url;
@@ -29,6 +26,9 @@ public class Part {
         this.element_img_url = element_img_url;
         this.rb_color_id = rb_color_id;
         this.part_type_id = part_type_id;
+    }
+
+    public Part() {
     }
 
     public String getPart_id() {return part_id;}

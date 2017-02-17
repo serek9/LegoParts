@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -47,7 +48,7 @@ public class PartsActivity extends AppCompatActivity {
 
         parts.loadFromTsv(tsv);
         Part p = parts.getPartFromIndex(1);
-        ListView  listView = (ListView) findViewById(list_parts);
+        ListView listView = (ListView) findViewById(list_parts);
 
         CatalogAdapter adapter = new CatalogAdapter(this, parts);
         listView.setAdapter(adapter);
@@ -65,11 +66,11 @@ public class PartsActivity extends AppCompatActivity {
 
     }
 
-    public String downloadParts(String codigo) {
+    public String downloadParts(String setId) {
         String xml = "";
         RebrickableService dd = new RebrickableService(this);
         try {
-            xml = dd.execute(codigo).get();
+            xml = dd.execute(setId).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -80,74 +81,66 @@ public class PartsActivity extends AppCompatActivity {
 
     public class CatalogAdapter extends BaseAdapter {
 
-            private Context context;
-            private PartRepository catalog;
+        private Context context;
+        private PartRepository catalog;
 
-            public CatalogAdapter(Context context, PartRepository catalog) {
-                this.context = context;
-                this.catalog = catalog;
-            }
-
-            @Override
-            public int getCount() {
-                return catalog.getNumOfParts();
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return catalog.getPartFromIndex(position);
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return position;
-            }
-
-            public class ViewHolder{
-
-                public TextView partName;
-                public TextView partColor;
-                public ImageView partImage;
-                public ImageView partLogo;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(ContextThemeWrapper.LAYOUT_INFLATER_SERVICE);
-                //View myView = inflater.inflate(R.layout.llista5_item, parent, false);
-                //RECICLAT DE VISTES
-                View myView = convertView;
-                if (myView == null){
-                    myView = inflater.inflate(R.layout.list_parts, parent, false);
-                    ViewHolder holder = new ViewHolder();
-                    holder.partName = (TextView) myView.findViewById(R.id.name);
-                    holder.partColor = (TextView) myView.findViewById(R.id.color);
-                    holder.partImage = (ImageView) myView.findViewById(R.id.image);
-                    holder.partLogo = (ImageView) myView.findViewById(R.id.logo);
-                    myView.setTag(holder);
-                }
-                ViewHolder holder = (ViewHolder) myView.getTag();
-                //|-Per estalviar inflates.
-                Part part = catalog.getPartFromIndex(position);
-                String name = part.getPart_name();
-                holder.partName.setText(name);
-                String color = part.getColor_name();
-                holder.partColor.setText(color);
-                Log.d("IMAGEN-----------",part.getElement_img_url());
-                //Drawable image = LoadImageFromWebOperations(part.getElement_img_url());
-                holder.partImage.setImageDrawable(LoadImageFromWebOperations(part.getPart_img_url()));
-                holder.partLogo.setImageResource(R.drawable.lego_head);
-                return myView;
-            }
+        public CatalogAdapter(Context context, PartRepository catalog) {
+            this.context = context;
+            this.catalog = catalog;
         }
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is,"srcName");
-            return d;
-            //TODO -- http://www.vogella.com/tutorials/JavaLibrary-OkHttp/article.html
-        } catch (Exception e) {
-            return null;
+
+        @Override
+        public int getCount() {
+            return catalog.getNumOfParts();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return catalog.getPartFromIndex(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        public class ViewHolder {
+
+            public TextView partName;
+            public TextView partColor;
+            public ImageView partImage;
+            public ImageView partLogo;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            //View myView = inflater.inflate(R.layout.llista5_item, parent, false);
+            //RECICLAT DE VISTES
+            View myView = convertView;
+            if (myView == null) {
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(ContextThemeWrapper.LAYOUT_INFLATER_SERVICE);
+                myView = inflater.inflate(R.layout.list_parts, parent, false);
+                ViewHolder holder = new ViewHolder();
+                holder.partName = (TextView) myView.findViewById(R.id.name);
+                holder.partColor = (TextView) myView.findViewById(R.id.color);
+                holder.partImage = (ImageView) myView.findViewById(R.id.image);
+                holder.partLogo = (ImageView) myView.findViewById(R.id.logo);
+                myView.setTag(holder);
+            }
+            CatalogAdapter.ViewHolder holder = (CatalogAdapter.ViewHolder) myView.getTag();
+            //|-Per estalviar inflates.
+            Part part = catalog.getPartFromIndex(position);
+            String name = part.getPart_name();
+            holder.partName.setText(name);
+            String color = part.getColor_name();
+            holder.partColor.setText(color);
+            //Log.d("IMAGEN-----------",part.getElement_img_url());
+            holder.partLogo.setImageResource(R.drawable.lego_head);
+            if (!catalog.getPartFromIndex(position).getPart_img_url().equals("")) {
+                Picasso.with(context).load(part.getPart_img_url()).placeholder(R.drawable.lego_head).into(holder.partImage);
+            }
+            return myView;
         }
     }
 }

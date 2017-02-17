@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setView = (TextView) findViewById(R.id.textView1);
         goButton = (Button) findViewById(R.id.button1);
         setText.setText("");
-        goButton.setOnClickListener(new View.OnClickListener(){
-            @Override public void onClick(View v){
+        goButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PartsActivity.class);
                 String setId = setText.getText().toString();
                 intent.putExtra("setId", setId);
@@ -33,8 +34,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 }

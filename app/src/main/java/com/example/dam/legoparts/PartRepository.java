@@ -24,13 +24,14 @@ public class PartRepository {
         return this.partRepository.size();
     }
 
-    public boolean loadFromTsv(String tsv){
-        Log.d("Sergio------", tsv);
-        List<String> lineas = Arrays.asList(tsv.split("\n"));
+    public boolean loadFromTsv(String f){
+        List<String> lineas = Arrays.asList(f.split("\n"));
 
         for(int i = 10; i < lineas.size(); i++){
             List<String> items = Arrays.asList(lineas.get(i).split("\t"));
-            Log.d("Sergio-------", items.get(0));
+            //public Part(String part_id, int qty, int ldraw_color, String part_name, String color_name, String part_img_url, String element_id,
+            // String element_img_url, int rb_color_id, int part_type_id) {
+
             Part p = new Part(items.get(1),Integer.parseInt(items.get(2)),Integer.parseInt(items.get(3)),items.get(4),items.get(5),
                     items.get(6),items.get(7),items.get(8),0,Integer.parseInt(items.get(10)));
 
