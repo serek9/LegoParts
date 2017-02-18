@@ -19,7 +19,8 @@
         </activity>
         <activity
             android:name=".PartsActivity"
-            android:label="@string/title_activity_parts"></activity>
+            android:label="@string/title_activity_parts" />
+        <activity android:name=".PartDetails"></activity>
     </application>
 
 </manifest>

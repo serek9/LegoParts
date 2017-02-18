@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">LegoParts</string>
     <string name="title_activity_parts">PartsActivity</string>
+    <string name="partName_tit">Name:</string>
+    <string name="partName_val">Example Brick 2x2</string>
+    <string name="partColor_tit">Color:</string>
+    <string name="partColor_val">Example Yellow</string>
+    <string name="detail_tit">Details</string>
+    <string name="info_tit">Please enter the code of the set to see all the parts included.</string>
+    <string name="setCode_tit">Code</string>
 </resources>

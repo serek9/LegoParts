@@ -1,7 +1,9 @@
 package com.example.dam.legoparts;
 
 
-public class Part {
+import java.io.Serializable;
+
+public class Part implements Serializable{
     private String part_id;
     private int qty;
     private int ldraw_color_id;

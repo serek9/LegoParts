@@ -1,6 +1,7 @@
 package com.example.dam.legoparts;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -21,7 +22,9 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Externalizable;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,20 +53,16 @@ public class PartsActivity extends AppCompatActivity {
         Part p = parts.getPartFromIndex(1);
         ListView listView = (ListView) findViewById(list_parts);
 
-        CatalogAdapter adapter = new CatalogAdapter(this, parts);
+        final CatalogAdapter adapter = new CatalogAdapter(this, parts);
         listView.setAdapter(adapter);
-        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(PartsActivity.this, "Click en item", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(PartsActivity.this, "Click fuera", Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getBaseContext(), PartDetails.class);
+                intent.putExtra("part", (Serializable) adapter.getItem(i));
+                startActivity(intent);
             }
         });
-
     }
 
     public String downloadParts(String setId) {
@@ -115,8 +114,6 @@ public class PartsActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            //View myView = inflater.inflate(R.layout.llista5_item, parent, false);
-            //RECICLAT DE VISTES
             View myView = convertView;
             if (myView == null) {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(ContextThemeWrapper.LAYOUT_INFLATER_SERVICE);
@@ -129,13 +126,11 @@ public class PartsActivity extends AppCompatActivity {
                 myView.setTag(holder);
             }
             CatalogAdapter.ViewHolder holder = (CatalogAdapter.ViewHolder) myView.getTag();
-            //|-Per estalviar inflates.
             Part part = catalog.getPartFromIndex(position);
             String name = part.getPart_name();
             holder.partName.setText(name);
             String color = part.getColor_name();
             holder.partColor.setText(color);
-            //Log.d("IMAGEN-----------",part.getElement_img_url());
             holder.partLogo.setImageResource(R.drawable.lego_head);
             if (!catalog.getPartFromIndex(position).getPart_img_url().equals("")) {
                 Picasso.with(context).load(part.getPart_img_url()).placeholder(R.drawable.lego_head).into(holder.partImage);
