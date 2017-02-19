@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LegoParts</string>
+    <string name="alien_tit">Nave Alien: 7065-1</string>
+    <string name="info_tit">Por Favor introduce el código del set para ver todas las piezas que incluye.</string>
+    <string name="mine_tit">Jungla Minecraft: 21125-1</string>
+    <string name="partColor_tit">Color:</string>
+    <string name="partColor_val"></string>
+    <string name="partName_tit">Nombre:</string>
+    <string name="setCode_tit">Código</string>
+    <string name="example_tit">CÓDIGOS DE EJEMPLO</string>
+</resources>

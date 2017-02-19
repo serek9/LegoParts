@@ -16,8 +16,6 @@ public class RebrickableService extends AsyncTask<String, String, String> {
 
     String xml;
 
-    public RebrickableService(){}
-
     private Context context;
 
     public RebrickableService(Context context){ this.context = context;}

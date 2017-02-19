@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.example.dam.legoparts.Part;
 
 public class PartDetails extends AppCompatActivity {
 

@@ -2,12 +2,9 @@ package com.example.dam.legoparts;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,27 +12,20 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.squareup.picasso.Picasso;
 
-import java.io.Externalizable;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import static com.example.dam.legoparts.R.id.list_parts;
 
 public class PartsActivity extends AppCompatActivity {
 
+    public PartsActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +38,6 @@ public class PartsActivity extends AppCompatActivity {
         String setId = extras.getString("setId");
 
         String tsv = downloadParts(setId);
-
         parts.loadFromTsv(tsv);
         Part p = parts.getPartFromIndex(1);
         ListView listView = (ListView) findViewById(list_parts);
@@ -67,9 +56,9 @@ public class PartsActivity extends AppCompatActivity {
 
     public String downloadParts(String setId) {
         String xml = "";
-        RebrickableService dd = new RebrickableService(this);
+        RebrickableService rebrickableService = new RebrickableService(this);
         try {
-            xml = dd.execute(setId).get();
+            xml = rebrickableService.execute(setId).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

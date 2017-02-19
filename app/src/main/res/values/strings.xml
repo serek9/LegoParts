@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">LegoParts</string>
-    <string name="title_activity_parts">PartsActivity</string>
+    <string name="title_activity_parts" translatable="false">PartsActivity</string>
     <string name="partName_tit">Name:</string>
-    <string name="partName_val">Example Brick 2x2</string>
+    <string name="partName_val" translatable="false">Example Brick 2x2</string>
     <string name="partColor_tit">Color:</string>
-    <string name="partColor_val">Example Yellow</string>
-    <string name="detail_tit">Details</string>
+    <string name="partColor_val" translatable="false">Example Yellow</string>
+    <string name="detail_tit" translatable="false">Details</string>
     <string name="info_tit">Please enter the code of the set to see all the parts included.</string>
     <string name="setCode_tit">Code</string>
+    <string name="example_tit">CODE EXAMPLES</string>
+    <string name="alien_tit">Alien Mothership: 7065-1</string>
+    <string name="mine_tit">Minecraft Jungle: 21125-1</string>
 </resources>
