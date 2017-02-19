@@ -81,7 +81,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:id="@+id/example1">
 
             <ImageView
                 android:layout_width="76dp"
@@ -105,7 +106,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="62dp"
-            android:layout_weight="0.16">
+            android:layout_weight="0.16"
+            android:id="@+id/example2">
 
             <ImageView
                 android:layout_width="75dp"
