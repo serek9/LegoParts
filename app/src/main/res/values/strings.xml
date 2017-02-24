@@ -11,4 +11,5 @@
     <string name="example_tit">CODE EXAMPLES</string>
     <string name="alien_tit">Alien Mothership: 7065-1</string>
     <string name="mine_tit">Minecraft Jungle: 21125-1</string>
+    <string name="APP_TIT" translatable="false">LEGOPARTS</string>
 </resources>

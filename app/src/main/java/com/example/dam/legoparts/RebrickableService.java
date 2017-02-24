@@ -74,6 +74,7 @@ public class RebrickableService extends AsyncTask<String, String, String> {
     @Override
     protected void onProgressUpdate(String... values) {
         pDialog.setProgress(Integer.parseInt(values[0]));
+        pDialog.show();
     }
 
     @Override
