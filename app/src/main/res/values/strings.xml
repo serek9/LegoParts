@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LegoParts</string>
+    <string name="app_name">Brick Parts</string>
     <string name="title_activity_parts" translatable="false">PartsActivity</string>
     <string name="partName_tit">Name:</string>
     <string name="partName_val" translatable="false">Example Brick 2x2</string>
@@ -11,5 +11,5 @@
     <string name="example_tit">CODE EXAMPLES</string>
     <string name="alien_tit">Alien Mothership: 7065-1</string>
     <string name="mine_tit">Minecraft Jungle: 21125-1</string>
-    <string name="APP_TIT" translatable="false">LEGOPARTS</string>
+    <string name="APP_TIT" translatable="false">BRICKPARTS</string>
 </resources>
